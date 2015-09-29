@@ -3,20 +3,17 @@ var router = express.Router();
 
 var moongoose = require('mongoose');
 moongoose.connect('mongodb://localhost/animalshelter');
-var Animal = require('./models/animals')
+var Animal = require('./models/animal')
 
 var bodyParser = require('body-parser');
-router.use(bodyParser.urlencoded({ extended: false }));
+router.use(bodyParser.urlencoded({ extended: true }));
 
 // INDEX
 router.get('/', function(req, res) {
-
   Animal.find({}, function(err, animals){
     if(err) console.log(err)
-    // res.render('index');
     res.json(animals);
   })
-
 });
 
 // CREATE

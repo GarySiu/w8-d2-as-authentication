@@ -5,3 +5,7 @@ body {
 #animal-form .pure-button {
   margin-top: 2em;
 }
+
+.pet {
+  display: inline-block;
+}

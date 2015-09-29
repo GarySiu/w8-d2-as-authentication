@@ -31,7 +31,6 @@ Animal = {
       $animalForm.trigger('reset');
     })
   }
-
 }
 
 View = {
