@@ -1,16 +1,14 @@
 var express = require('express')
+var app = express()
 var path = require('path')
 var debug = require("debug")
 var logger = require('morgan')
 var expressLayouts = require('express-ejs-layouts')
-var app = express()
+var moongoose = require('mongoose')
+moongoose.connect('mongodb://localhost/animalshelter');
 
 var passport = require('passport')
 var LocalStrategy = require('passport-local').Strategy
-
-// setup modular routing for the animals resource
-var animalsRes = require ('./animalsRoute')
-app.use('/animals', animalsRes)
 
 app.use(logger('dev'))
 app.set('views', path.join(__dirname, 'views'))
@@ -18,11 +16,6 @@ app.use(express.static(__dirname + '/public'))
 app.use(expressLayouts)
 app.engine('ejs', require('ejs').renderFile)
 app.set('view engine', 'ejs')
-
-// root renders index
-app.get('/', function(req, res){
-  res.render('index')
-})
 
 // development error handler
 // will print stacktrace
@@ -35,5 +28,10 @@ if (app.get('env') === 'development') {
     })
   })
 }
+
+// setup modular routing
+// app.use(require('./config/routes'))
+app.use('/', require('./controllers/statics'))
+app.use('/animals', require('./controllers/animals'))
 
 app.listen(3000)

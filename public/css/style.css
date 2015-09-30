@@ -3,9 +3,13 @@ body {
 }
 
 #animal-form .pure-button {
-  margin-top: 2em;
+  margin-top: 1em;
 }
 
 .pet {
   display: inline-block;
+}
+
+h1, h2 {
+  margin: 0.3em 0;
 }
